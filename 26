@@ -1,0 +1,32 @@
+26-
+#include <stdio.h>
+#define MAX 10 // Definindo o tamanho máximo para as matrizes
+int main() { int matriz1[MAX][MAX], matriz2[MAX][MAX], resultado[MAX][MAX]; int linhas, colunas;
+
+printf("Digite o número de linhas e colunas das matrizes: ");
+scanf("%d %d", &linhas, &colunas);
+
+if (linhas > MAX || colunas > MAX || linhas <= 0 || colunas <= 0) {
+    printf("Tamanho da matriz inválido.\n");
+    return 1;
+}
+
+printf("Digite os elementos da primeira matriz:\n");
+lerMatriz(matriz1, linhas, colunas);
+
+printf("Digite os elementos da segunda matriz:\n");
+lerMatriz(matriz2, linhas, colunas);
+
+somarMatrizes(matriz1, matriz2, resultado, linhas, colunas);
+
+printf("\nPrimeira matriz:\n");
+imprimirMatriz(matriz1, linhas, colunas);
+
+printf("\nSegunda matriz:\n");
+imprimirMatriz(matriz2, linhas, colunas);
+
+printf("\nMatriz resultante da soma:\n");
+imprimirMatriz(resultado, linhas, colunas);
+
+return 0;
+}
