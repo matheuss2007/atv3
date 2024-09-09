@@ -1,0 +1,23 @@
+20-
+#include using namespace std;
+
+int main() { int n;
+
+cout << "Digite o número de elementos no vetor: ";
+cin >> n;
+
+int* arr = new int[n]; // Cria um vetor dinamicamente
+
+cout << "Digite os elementos do vetor: ";
+for (int i = 0; i < n; ++i) {
+    cin >> arr[i];
+}
+bubbleSort(arr, n);
+
+cout << "Vetor ordenado em ordem crescente: ";
+exibirVetor(arr, n);
+
+delete[] arr; // Libera a memória alocada para o vetor
+
+return 0;
+}
