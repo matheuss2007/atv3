@@ -1,0 +1,31 @@
+24-
+#include <stdio.h> #include <math.h> #include <string.h>
+int binarioParaDecimal(const char *binario) { int decimal = 0; int comprimento = strlen(binario);
+
+for (int i = comprimento - 1; i >= 0; i--) {
+    if (binario[i] == '1') {
+        decimal += pow(2, comprimento - 1 - i);
+    }
+}
+
+return decimal;
+}
+
+int main() { char binario[65]; // Assumindo um máximo de 64 bits + 1 para o terminador nulo
+
+printf("Digite um número binário: ");
+scanf("%s", binario);
+
+for (int i = 0; i < strlen(binario); i++) {
+    if (binario[i] != '0' && binario[i] != '1') {
+        printf("Número binário inválido.\n");
+        return 1;
+    }
+}
+
+int decimal = binarioParaDecimal(binario);
+
+printf("O número decimal é: %d\n", decimal);
+
+return 0;
+}
