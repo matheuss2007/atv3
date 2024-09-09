@@ -1,0 +1,23 @@
+29-
+#include <stdio.h> #include <ctype.h> // Para a função tolower
+while ((c = *str++) != '\0') {
+    c = tolower(c);
+    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+        contador++;
+    }
+}
+
+return contador;
+}
+
+int main() { char str[100];
+
+printf("Digite uma string: ");
+fgets(str, sizeof(str), stdin);
+
+int numeroDeVogais = contarVogais(str);
+
+printf("Número de vogais na string: %d\n", numeroDeVogais);
+
+return 0;
+}
