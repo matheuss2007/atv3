@@ -1,0 +1,32 @@
+30-
+#include <stdio.h> #include <ctype.h> // Para a função isdigit
+while (isspace(*str)) {
+    str++;
+}
+
+if (*str == '-') {
+    sinal = -1;
+    str++;
+} else if (*str == '+') {
+    str++;
+}
+
+while (*str && isdigit(*str)) {
+    resultado = resultado * 10 + (*str - '0');
+    str++;
+}
+
+return sinal * resultado;
+}
+
+int main() { char str[100];
+
+printf("Digite uma string para converter em inteiro: ");
+fgets(str, sizeof(str), stdin);
+
+int numero = stringParaInteiro(str);
+
+printf("Número inteiro convertido: %d\n", numero);
+
+return 0;
+}
