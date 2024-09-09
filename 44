@@ -1,0 +1,42 @@
+ 44- #include <stdio.h> #include <stdbool.h>
+
+#define N 8
+
+typedef struct { int x; int y; } Posicao;
+
+bool dentroDoTabuleiro(int x, int y) { return (x >= 0 && x < N && y >= 0 && y < N); }
+
+void imprimirTabuleiro(bool tabuleiro[N][N]) { for (int i = 0; i < N; i++) { for (int j = 0; j < N; j++) { if (tabuleiro[i][j]) { printf(" K "); } else { printf(" . "); } } printf("\n"); } }
+
+void movimentosCavalo(int x, int y) { int movimentos[8][2] = { {2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2} };
+
+bool tabuleiro[N][N] = {false}; 
+
+if (dentroDoTabuleiro(x, y)) {
+    tabuleiro[x][y] = true;
+}
+
+for (int i = 0; i < 8; i++) {
+    int novoX = x + movimentos[i][0];
+    int novoY = y + movimentos[i][1];
+    if (dentroDoTabuleiro(novoX, novoY)) {
+        tabuleiro[novoX][novoY] = true;
+    }
+}
+
+imprimirTabuleiro(tabuleiro);
+}
+
+int main() { int x, y;
+
+printf("Digite a posição inicial do cavalo (x y): ");
+scanf("%d %d", &x, &y);
+
+if (!dentroDoTabuleiro(x, y)) {
+    printf("Posição inicial fora do tabuleiro.\n");
+    return 1;
+}
+
+movimentosCavalo(x, y);
+
+return 0;
