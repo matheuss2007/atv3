@@ -1,0 +1,30 @@
+25-
+#include <stdio.h>
+void decimalParaBinario(int numero) { 
+if (numero == 0) {
+    printf("0");
+    return;
+}
+
+while (numero > 0) {
+    binario[i] = numero % 2;  // Armazena o resto da divisão por 2
+    numero /= 2;              // Divide o número por 2
+    i++;
+}
+
+printf("Número binário: ");
+for (int j = i - 1; j >= 0; j--) {
+    printf("%d", binario[j]);
+}
+printf("\n");
+}
+
+int main() { int numeroDecimal;
+
+printf("Digite um número decimal: ");
+scanf("%d", &numeroDecimal);
+
+decimalParaBinario(numeroDecimal);
+
+return 0;
+}
