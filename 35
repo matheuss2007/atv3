@@ -1,0 +1,74 @@
+35- #include <stdio.h>
+
+void swap(int *a, int *b) { int temp = *a; *a = *b; *b = temp; }
+
+int partition(int arr[], int low, int high) { int pivot = arr[high]; int i = low - 1;
+
+for (int j = low; j < high; j++) {
+    if (arr[j] <= pivot) {
+        i++; 
+        swap(&arr[i], &arr[j]);
+    }
+}
+swap(&arr[i + 1], &arr[high]); 
+return (i + 1); 
+}
+
+void quickSort(int arr[], int low, int high) { if (low < high) {
+
+    int pi = partition(arr, low, high);
+
+    quickSort(arr, low, pi - 1);
+    quickSort(arr, pi + 1, high);
+}
+}
+
+void printArray(int arr[], int size) { for (int i = 0; i < size; i++) printf("%d ", arr[i]); printf("\n"); }
+
+int main() { int arr[] = {64, 34, 25, 12, 22, 11, 90}; int n = sizeof(arr) / sizeof(arr[0]);
+
+printf("Array antes da ordenação: \n");
+printArray(arr, n);
+
+quickSort(arr, 0, n - 1);
+
+printf("Array depois da ordenação: \n");
+printArray(arr, n);
+
+return 0;
+} QUESTÃO 36- #include <stdio.h> #include <stdlib.h>
+
+#define MAX 100
+
+typedef struct { int top; int array[MAX]; } Stack;
+
+void initStack(Stack *s) { s->top = -1; }
+
+int isEmpty(Stack *s) { return s->top == -1; }
+
+int isFull(Stack *s) { return s->top == MAX - 1; }
+
+void push(Stack *s, int value) { if (isFull(s)) { printf("Pilha cheia! Não é possível empurrar o valor %d\n", value); return; } s->array[++(s->top)] = value; printf("Empurrou %d para a pilha\n", value); }
+
+int pop(Stack *s) { if (isEmpty(s)) { printf("Pilha vazia! Não é possível remover um valor\n"); return -1; } return s->array[(s->top)--]; }
+
+int peek(Stack *s) { if (isEmpty(s)) { printf("Pilha vazia! Não há valor no topo\n"); return -1; } return s->array[s->top]; }
+
+void printStack(Stack *s) { if (isEmpty(s)) { printf("Pilha vazia!\n"); return; } printf("Elementos na pilha: "); for (int i = 0; i <= s->top; i++) { printf("%d ", s->array[i]); } printf("\n"); }
+
+int main() { Stack s; initStack(&s);
+
+push(&s, 10);
+push(&s, 20);
+push(&s, 30);
+
+printStack(&s);
+
+printf("Topo da pilha: %d\n", peek(&s));
+
+printf("Removido da pilha: %d\n", pop(&s));
+printf("Removido da pilha: %d\n", pop(&s));
+
+printStack(&s);
+
+return 0;
