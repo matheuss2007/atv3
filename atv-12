@@ -1,0 +1,22 @@
+12- Soma dos Números Naturais
+#include <stdio.h>
+
+int main () {
+	
+	int N;
+	
+	printf("digite o valor de N:\n");
+	scanf("%d", &N);
+	
+  if (N < 1) {
+  	printf("N deve ser um numero natural! (N >= 1).\n");
+  	return 1;
+	}
+	
+	int soma = N * (N + 1)/2;
+	 
+	printf("esse e o resultado da soma %d desses numeros naturais: %d\n", N, soma);
+	
+	return 0;
+	
+}
