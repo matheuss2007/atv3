@@ -1,0 +1,70 @@
+ 39- #include <stdio.h> #include <stdlib.h> #include <ctype.h> #include <string.h>
+
+#define MAX 100
+
+typedef struct { int top; int items[MAX]; } Stack;
+
+void initStack(Stack *s) { s->top = -1; }
+
+int isEmpty(Stack *s) { return s->top == -1; }
+
+int isFull(Stack *s) { return s->top == MAX - 1; }
+
+void push(Stack *s, int value) { if (isFull(s)) { printf("Pilha cheia!\n"); return; } s->items[++(s->top)] = value; }
+
+int pop(Stack *s) { if (isEmpty(s)) { printf("Pilha vazia!\n"); return -1; } return s->items[(s->top)--]; }
+
+int evaluatePostfix(const char *postfix) { Stack s; initStack(&s);
+
+int i = 0;
+while (postfix[i] != '\0') {
+    char c = postfix[i];
+
+    if (isdigit(c)) {
+        push(&s, c - '0');
+    } else if (c == ' ') {
+    } else {
+        int val2 = pop(&s);
+        int val1 = pop(&s);
+        int result;
+
+        switch (c) {
+            case '+':
+                result = val1 + val2;
+                break;
+            case '-':
+                result = val1 - val2;
+                break;
+            case '*':
+                result = val1 * val2;
+                break;
+            case '/':
+                result = val1 / val2;
+                break;
+            default:
+                printf("Operador inválido: %c\n", c);
+                return -1; 
+        }
+        push(&s, result);
+    }
+    i++;
+}
+
+return pop(&s);
+}
+
+int main() { char postfix[MAX];
+
+printf("Digite a expressão pós-fixa: ");
+fgets(postfix, MAX, stdin);
+
+size_t len = strlen(postfix);
+if (len > 0 && postfix[len - 1] == '\n') {
+    postfix[len - 1] = '\0';
+}
+
+int result = evaluatePostfix(postfix);
+
+printf("Resultado da expressão pós-fixa: %d\n", result);
+
+return 0;
