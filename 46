@@ -1,0 +1,87 @@
+ 45- #include <stdio.h> #include <stdbool.h>
+
+#define N 9
+
+void imprimirSudoku(int sudoku[N][N]) { for (int i = 0; i < N; i++) { for (int j = 0; j < N; j++) { printf("%d ", sudoku[i][j]); } printf("\n"); } }
+
+bool ehSeguro(int sudoku[N][N], int linha, int coluna, int num) {
+
+for (int x = 0; x < N; x++) {
+    if (sudoku[linha][x] == num) {
+        return false;
+    }
+}
+for (int x = 0; x < N; x++) {
+    if (sudoku[x][coluna] == num) {
+        return false;
+    }
+}
+
+int inicioLinha = linha - linha % 3;
+int inicioColuna = coluna - coluna % 3;
+for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+        if (sudoku[i + inicioLinha][j + inicioColuna] == num) {
+            return false;
+        }
+    }
+}
+
+return true;
+}
+
+bool resolverSudoku(int sudoku[N][N]) { int linha, coluna;
+
+bool vazio = false;
+for (linha = 0; linha < N; linha++) {
+    for (coluna = 0; coluna < N; coluna++) {
+        if (sudoku[linha][coluna] == 0) {
+            vazio = true;
+            break;
+        }
+    }
+    if (vazio) {
+        break;
+    }
+}
+
+if (!vazio) {
+    return true;
+}
+
+for (int num = 1; num <= 9; num++) {
+    if (ehSeguro(sudoku, linha, coluna, num)) {
+        sudoku[linha][coluna] = num;
+
+        if (resolverSudoku(sudoku)) {
+            return true;
+        }
+        sudoku[linha][coluna] = 0;
+    }
+}
+
+return false;
+}
+
+int main() {
+
+int sudoku[N][N] = {
+    {5, 3, 0, 0, 7, 0, 0, 0, 0},
+    {6, 0, 0, 1, 9, 5, 0, 0, 0},
+    {0, 9, 8, 0, 0, 0, 0, 6, 0},
+    {8, 0, 0, 0, 6, 0, 0, 0, 3},
+    {4, 0, 0, 8, 0, 3, 0, 0, 1},
+    {7, 0, 0, 0, 2, 0, 0, 0, 6},
+    {0, 6, 0, 0, 0, 0, 2, 8, 0},
+    {0, 0, 0, 4, 1, 9, 0, 0, 5},
+    {0, 0, 0, 0, 8, 0, 0, 7, 9}
+};
+
+if (resolverSudoku(sudoku)) {
+    printf("Sudoku resolvido:\n");
+    imprimirSudoku(sudoku);
+} else {
+    printf("Não há solução para o Sudoku fornecido.\n");
+}
+
+return 0;
