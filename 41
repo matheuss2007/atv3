@@ -1,0 +1,42 @@
+41- #include <stdio.h> #include <ctype.h> #include <string.h>
+
+#define MAX 100
+
+void cifraCesar(char *mensagem, int chave) { int i; for (i = 0; mensagem[i] != '\0'; i++) { char c = mensagem[i];
+
+    if (isalpha(c)) {
+        char base = isupper(c) ? 'A' : 'a';
+        mensagem[i] = (c - base + chave) % 26 + base;
+    }
+}
+}
+
+void decifraCesar(char *mensagem, int chave) { cifraCesar(mensagem, 26 - (chave % 26)); }
+
+int main() { char mensagem[MAX]; int chave; char escolha;
+
+printf("Digite a mensagem (máximo %d caracteres): ", MAX - 1);
+fgets(mensagem, MAX, stdin);
+
+size_t len = strlen(mensagem);
+if (len > 0 && mensagem[len - 1] == '\n') {
+    mensagem[len - 1] = '\0';
+}
+
+printf("Digite a chave (número de posições para deslocar): ");
+scanf("%d", &chave);
+
+printf("Digite 'e' para criptografar ou 'd' para descriptografar: ");
+scanf(" %c", &escolha);
+
+if (escolha == 'e') {
+    cifraCesar(mensagem, chave);
+    printf("Mensagem criptografada: %s\n", mensagem);
+} else if (escolha == 'd') {
+    decifraCesar(mensagem, chave);
+    printf("Mensagem descriptografada: %s\n", mensagem);
+} else {
+    printf("Escolha inválida.\n");
+}
+
+return 0;
