@@ -1,0 +1,50 @@
+ 48- #include <stdio.h> #include <stdlib.h> #include <stdbool.h>
+
+#define NUM_ANDARES 10
+
+typedef struct { int andar_atual; int destino; bool em_movimento; } Elevador;
+
+void inicializa_elevador(Elevador *elevador) { elevador->andar_atual = 0; elevador->destino = -1; elevador->em_movimento = false; }
+
+void mover_elevador(Elevador *elevador) { if (elevador->destino == -1) { printf("O elevador não tem destino definido.\n"); return; }
+
+elevador->em_movimento = true;
+
+if (elevador->andar_atual < elevador->destino) {
+    printf("O elevador está subindo.\n");
+    while (elevador->andar_atual < elevador->destino) {
+        elevador->andar_atual++;
+        printf("Elevador no andar %d.\n", elevador->andar_atual);
+    }
+} else if (elevador->andar_atual > elevador->destino) {
+    printf("O elevador está descendo.\n");
+    while (elevador->andar_atual > elevador->destino) {
+        elevador->andar_atual--;
+        printf("Elevador no andar %d.\n", elevador->andar_atual);
+    }
+}
+
+elevador->em_movimento = false;
+elevador->destino = -1; 
+printf("O elevador chegou ao andar %d.\n", elevador->andar_atual);
+}
+
+void chamar_elevador(Elevador *elevador, int andar_destino) { if (andar_destino < 0 || andar_destino >= NUM_ANDARES) { printf("Andar inválido!\n"); return; }
+
+if (elevador->em_movimento) {
+    printf("O elevador já está em movimento. Por favor, espere.\n");
+    return;
+}
+
+elevador->destino = andar_destino;
+printf("Chamando o elevador para o andar %d.\n", andar_destino);
+mover_elevador(elevador);
+}
+
+int main() { Elevador elevador; inicializa_elevador(&elevador);
+
+chamar_elevador(&elevador, 3); 
+chamar_elevador(&elevador, 7);
+chamar_elevador(&elevador, 2);  
+
+return 0;
