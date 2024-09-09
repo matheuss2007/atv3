@@ -1,0 +1,47 @@
+22-
+#include using namespace std;
+
+while (esquerda <= direita) {
+    int meio = esquerda + (direita - esquerda) / 2;
+    
+    if (arr[meio] == valor) {
+        return meio; // Valor encontrado, retorna o índice
+    }
+    
+    if (arr[meio] < valor) {
+        esquerda = meio + 1; // Descartar a metade esquerda
+    } else {
+        direita = meio - 1; // Descartar a metade direita
+    }
+}
+
+return -1; // Valor não encontrado
+}
+
+int main() { int n, valor;
+
+cout << "Digite o número de elementos no vetor: ";
+cin >> n;
+
+int* arr = new int[n]; // Cria um vetor dinamicamente
+
+cout << "Digite os elementos do vetor (em ordem crescente): ";
+for (int i = 0; i < n; ++i) {
+    cin >> arr[i];
+}
+
+cout << "Digite o valor a ser buscado: ";
+cin >> valor;
+
+int resultado = buscaBinaria(arr, n, valor);
+
+if (resultado != -1) {
+    cout << "Valor " << valor << " encontrado no índice " << resultado << "." << endl;
+} else {
+    cout << "Valor " << valor << " não encontrado no vetor." << endl;
+}
+
+delete[] arr; // Libera a memória alocada para o vetor
+
+return 0;
+}
