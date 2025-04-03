@@ -1,0 +1,15 @@
+create DataBase cadastroAlunos
+character set utf8mb4
+collate       utf8mb4_unicode_ci;
+
+use cadastroAlunos;
+
+create table if not exists usuario(
+create table Alunos(
+name string (50) primary key not null
+data string (50) not null
+numero string (50) not null
+curso string (50) not null
+);
+
+select *for Alunos;  
